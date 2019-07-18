@@ -1,0 +1,98 @@
+@charset "utf-8";
+a {
+  text-decoration: none;
+}
+a:link {
+  text-decoration: none; /* 指正常的未被访问过的链接*/
+}
+a:visited {
+  text-decoration: none; /*指已经访问过的链接*/
+}
+a:hover {
+  text-decoration: none; /*指鼠标在链接*/
+}
+a:active {
+  text-decoration: none; /* 指正在点的链接*/
+}
+/*清除number的默认样式,就是那个上下加减的箭头*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+/*禁止textarea拉伸*/
+textarea[type='textarea'] {
+  resize: none;
+}
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+}
+ul li,
+ol li {
+  list-style: none;
+}
+body,
+p,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 12px;
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+img {
+  border: none;
+  vertical-align: middle;
+}
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+} /*清除浮动*/
+.clearfix {
+  *zoom: 1;
+}
+/* 表格边框和元素间距清空 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+.hide {
+  display: none;
+}
+.show {
+  display: block;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
