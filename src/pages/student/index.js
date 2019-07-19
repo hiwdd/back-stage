@@ -34,7 +34,7 @@ class Student extends React.Component {
               title="修改"
               visible={this.state.visible}
               onOk={() => {
-                this.props.handleOk(record.id, nameVal, ageVal, sexVal);
+                this.props.handleOk(this.state.id, nameVal, ageVal, sexVal);
                 this.setState({
                   visible: false,
                 });
@@ -70,7 +70,7 @@ class Student extends React.Component {
       },
     },
   ];
-  state = { visible: false, nameVal: '', ageVal: '', sexVal: '' };
+  state = { visible: false, nameVal: '', ageVal: '', sexVal: '', id: 1 };
 
   showModal = record => {
     this.setState({
@@ -78,6 +78,7 @@ class Student extends React.Component {
       nameVal: record.name,
       ageVal: record.age,
       sexVal: record.sex,
+      id: record.id,
     });
   };
 

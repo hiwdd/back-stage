@@ -8,10 +8,13 @@ export default {
     searchName: '',
   },
   effects: {
-    *initData(action, { put }) {
-      let page = action.page;
-      let limit = action.pageSize;
-      let searchName = action.searchName;
+    *initData(action, { put, select }) {
+      let page = yield select(state => state.student.page);
+      let limit = yield select(state => state.student.limit);
+      let searchName = yield select(state => state.student.searchName);
+      page = action.page || page;
+      limit = action.pageSize || limit;
+      searchName = action.searchName || searchName;
       let response = yield fetch(
         `http://localhost:3000/student?_page=${page}&_limit=${limit}&name_like=${searchName}`,
       );

@@ -2,7 +2,9 @@ import { message } from 'antd';
 export default {
   namespace: 'user',
   state: {
-    username: '用户',
+    username: window.sessionStorage.getItem('username')
+      ? window.sessionStorage.getItem('username')
+      : '用户',
   },
   effects: {
     *login(action, { put }) {
@@ -16,6 +18,7 @@ export default {
         ) {
           let username = res[i].username;
           yield put({ type: 'CheckTheUser', name: username });
+          yield window.sessionStorage.setItem('username', username);
           yield message.success('登录成功', 0.5);
           yield (window.location.href = '/');
           return;
