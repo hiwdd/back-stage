@@ -1,10 +1,11 @@
 import { message } from 'antd';
+import router from 'umi/router';
 export default {
   namespace: 'user',
   state: {
     username: window.sessionStorage.getItem('username')
       ? window.sessionStorage.getItem('username')
-      : '用户',
+      : '',
   },
   effects: {
     *login(action, { put }) {
@@ -20,7 +21,7 @@ export default {
           yield put({ type: 'CheckTheUser', name: username });
           yield window.sessionStorage.setItem('username', username);
           yield message.success('登录成功', 0.5);
-          yield (window.location.href = '/');
+          yield router.replace('/');
           return;
         }
       }

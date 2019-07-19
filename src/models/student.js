@@ -34,7 +34,7 @@ export default {
       let content = {
         name: action.nameVal,
         age: action.ageVal,
-        sex: action.sexVal,
+        sex: action.sexVal1,
       };
       let response = yield fetch(`http://localhost:3000/student/${action.id}`, {
         method: 'PUT',

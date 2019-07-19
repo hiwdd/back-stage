@@ -1,6 +1,12 @@
+/**
+ * title: 学生管理
+ * Routes:
+ *  - ./src/routes/PrivateRoute.js
+ */
+
 import { connect } from 'dva';
 import React from 'react';
-import { Table, Button, Modal, Input, Popconfirm } from 'antd';
+import { Table, Button, Modal, Input, Popconfirm, message } from 'antd';
 import styles from './index.less';
 
 class Student extends React.Component {
@@ -22,6 +28,7 @@ class Student extends React.Component {
         return (
           <div>
             <Button
+              size="small"
               type="dashed"
               onClick={() => {
                 // this.handleEdi(record.id);
@@ -34,23 +41,27 @@ class Student extends React.Component {
               title="修改"
               visible={this.state.visible}
               onOk={() => {
-                this.props.handleOk(this.state.id, nameVal, ageVal, sexVal);
-                this.setState({
-                  visible: false,
-                });
+                if (nameVal && ageVal && sexVal) {
+                  this.props.handleOk(this.state.id, nameVal, ageVal, sexVal);
+                  this.setState({
+                    visible: false,
+                  });
+                } else {
+                  message.error('内容不能为空');
+                }
               }}
               onCancel={this.handleCancel}
             >
               <label>
-                姓名：
+                <span> 姓名：</span>
                 <Input name="nameVal" value={nameVal} onChange={this.handleChg} />
               </label>
               <label>
-                年龄：
+                <span>年龄：</span>
                 <Input name="ageVal" value={ageVal} onChange={this.handleChg} />
               </label>
               <label>
-                性别：
+                <span> 性别：</span>
                 <Input name="sexVal" value={sexVal} onChange={this.handleChg} />
               </label>
             </Modal>
@@ -63,7 +74,9 @@ class Student extends React.Component {
               okText="Yes"
               cancelText="No"
             >
-              <Button type="danger">删除</Button>
+              <Button type="danger" size="small">
+                删除
+              </Button>
             </Popconfirm>
           </div>
         );
@@ -77,7 +90,7 @@ class Student extends React.Component {
       visible: true,
       nameVal: record.name,
       ageVal: record.age,
-      sexVal: record.sex,
+      sexVal: record.sex === 1 ? '男' : '女',
       id: record.id,
     });
   };
@@ -110,6 +123,7 @@ class Student extends React.Component {
           </Button>
         </div>
         <Table
+          className={styles.table}
           rowKey="id"
           columns={this.columns}
           dataSource={this.props.data}
@@ -154,12 +168,13 @@ export default connect(
         });
       },
       handleOk: (id, nameVal, ageVal, sexVal) => {
+        let sexVal1 = sexVal === '男' ? 1 : 0;
         dispatch({
           type: 'student/ediData',
           id,
           nameVal,
           ageVal,
-          sexVal,
+          sexVal1,
         });
       },
     };
